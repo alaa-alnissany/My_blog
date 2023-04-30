@@ -1,0 +1,65 @@
+[
+  {
+    "objectID": "about.html",
+    "href": "about.html",
+    "title": "About",
+    "section": "",
+    "text": "About this blog"
+  },
+  {
+    "objectID": "posts/Monocular depth estimation/MDE.html",
+    "href": "posts/Monocular depth estimation/MDE.html",
+    "title": "Monocular depth estimation",
+    "section": "",
+    "text": "Depth estimation refers to estimate the distance of objects to a reference point. It can be measured in active methods or passive ones. In this blog, we will take about passive methods in monocular depth estimation.\n\n\nMonocular depth refers to estimates depth from a single image. Is this possible? Well, while this is an ill-pose problem(there are many solutions, actually infinite), we as human perform very well in it.\n\n\n\nWe depend on multi clues, so what are those clues?\n\n\nimport numpy as np\nfrom matplotlib import pyplot as plt\n\n\ndef create_parabolic(a, x_0, s_a, s_b):\n    def calculate(x):\n        noise_a = s_a * np.random.randn(x.shape[0])\n        noise_b = s_b * np.random.randn(x.shape[0])\n        return (a + noise_a) * (x-x_0 + noise_b)**2\n    return calculate\na = 1\nx_0 = 0\ns_a = 0.1\ns_b = 0.1\n\npara_true = create_parabolic(a, x_0, 0, 0)\npara_noise = create_parabolic(a, x_0, s_a, s_b)\nx = np.linspace(-3, 3, 100)\nplt.scatter(x, para_true(x), c='r', label='true_data')\nplt.scatter(x, para_noise(x), c='k', label='noise_data')\nplt.title('True data vs Noisy data')\nplt.legend()\nplt.grid()\nplt.show()\n\n\n\n\n\nimport ipywidgets as widgets\n@widgets.interact\ndef fit(a_pred=2, b_pred=2):\n    func = create_parabolic(a_pred, b_pred, 0, 0)\n    y_pred = func(x)\n    y_true = para_noise(x)\n    loss = np.mean((y_true-y_pred)**2)\n    plt.scatter(x, y_true, alpha=0.5)\n    plt.plot(x, y_pred, '-k')\n    plt.title(f'Loss {loss:.2f}')"
+  },
+  {
+    "objectID": "posts/Monocular depth estimation/MDE.html#monocular-depth-estimation",
+    "href": "posts/Monocular depth estimation/MDE.html#monocular-depth-estimation",
+    "title": "Monocular depth estimation",
+    "section": "",
+    "text": "Monocular depth refers to estimates depth from a single image. Is this possible? Well, while this is an ill-pose problem(there are many solutions, actually infinite), we as human perform very well in it."
+  },
+  {
+    "objectID": "posts/Monocular depth estimation/MDE.html#how-are-we-able-to-do-that",
+    "href": "posts/Monocular depth estimation/MDE.html#how-are-we-able-to-do-that",
+    "title": "Monocular depth estimation",
+    "section": "",
+    "text": "We depend on multi clues, so what are those clues?\n\n\nimport numpy as np\nfrom matplotlib import pyplot as plt\n\n\ndef create_parabolic(a, x_0, s_a, s_b):\n    def calculate(x):\n        noise_a = s_a * np.random.randn(x.shape[0])\n        noise_b = s_b * np.random.randn(x.shape[0])\n        return (a + noise_a) * (x-x_0 + noise_b)**2\n    return calculate\na = 1\nx_0 = 0\ns_a = 0.1\ns_b = 0.1\n\npara_true = create_parabolic(a, x_0, 0, 0)\npara_noise = create_parabolic(a, x_0, s_a, s_b)\nx = np.linspace(-3, 3, 100)\nplt.scatter(x, para_true(x), c='r', label='true_data')\nplt.scatter(x, para_noise(x), c='k', label='noise_data')\nplt.title('True data vs Noisy data')\nplt.legend()\nplt.grid()\nplt.show()\n\n\n\n\n\nimport ipywidgets as widgets\n@widgets.interact\ndef fit(a_pred=2, b_pred=2):\n    func = create_parabolic(a_pred, b_pred, 0, 0)\n    y_pred = func(x)\n    y_true = para_noise(x)\n    loss = np.mean((y_true-y_pred)**2)\n    plt.scatter(x, y_true, alpha=0.5)\n    plt.plot(x, y_pred, '-k')\n    plt.title(f'Loss {loss:.2f}')"
+  },
+  {
+    "objectID": "posts/my_first_blog/knn.html",
+    "href": "posts/my_first_blog/knn.html",
+    "title": "My first blog",
+    "section": "",
+    "text": "It’s a model that is used in binary classification. It output a probability that inputs belongs to the first class. So, we have\nhere there is an image That is useful when we also care in how we confidence are we in our predictions.\nSo logistic regression produe the p(y_i=1), what about p(y_i=0)? Easy, it just the comploment of p(y_i=1), p(y_i=0) = 1- p(y_i=0)\nIt consists of perceptron with sigmoid function as it’s activation function, as shown in the photos\n\n\nimport numpy as np\nfrom matplotlib import pyplot as plt\n\n\ndef create_parabolic(a, x_0, s_a, s_b):\n    def calculate(x):\n        noise_a = s_a * np.random.randn(x.shape[0])\n        noise_b = s_b * np.random.randn(x.shape[0])\n        return (a + noise_a) * (x-x_0 + noise_b)**2\n    return calculate\na = 1\nx_0 = 0\ns_a = 0.1\ns_b = 0.1\n\npara_true = create_parabolic(a, x_0, 0, 0)\npara_noise = create_parabolic(a, x_0, s_a, s_b)\nx = np.linspace(-3, 3, 100)\nplt.scatter(x, para_true(x), c='r', label='true_data')\nplt.scatter(x, para_noise(x), c='k', label='noise_data')\nplt.title('True data vs Noisy data')\nplt.legend()\nplt.grid()\nplt.show()\n\n\n\n\n\nimport ipywidgets as widgets\n@widgets.interact\ndef fit(a_pred=2, b_pred=2):\n    func = create_parabolic(a_pred, b_pred, 0, 0)\n    y_pred = func(x)\n    y_true = para_noise(x)\n    loss = np.mean((y_true-y_pred)**2)\n    plt.scatter(x, y_true, alpha=0.5)\n    plt.plot(x, y_pred, '-k')\n    plt.title(f'Loss {loss:.2f}')"
+  },
+  {
+    "objectID": "posts/my_first_blog/knn.html#what-is-logistic-regression",
+    "href": "posts/my_first_blog/knn.html#what-is-logistic-regression",
+    "title": "My first blog",
+    "section": "",
+    "text": "It’s a model that is used in binary classification. It output a probability that inputs belongs to the first class. So, we have\nhere there is an image That is useful when we also care in how we confidence are we in our predictions.\nSo logistic regression produe the p(y_i=1), what about p(y_i=0)? Easy, it just the comploment of p(y_i=1), p(y_i=0) = 1- p(y_i=0)\nIt consists of perceptron with sigmoid function as it’s activation function, as shown in the photos\n\n\nimport numpy as np\nfrom matplotlib import pyplot as plt\n\n\ndef create_parabolic(a, x_0, s_a, s_b):\n    def calculate(x):\n        noise_a = s_a * np.random.randn(x.shape[0])\n        noise_b = s_b * np.random.randn(x.shape[0])\n        return (a + noise_a) * (x-x_0 + noise_b)**2\n    return calculate\na = 1\nx_0 = 0\ns_a = 0.1\ns_b = 0.1\n\npara_true = create_parabolic(a, x_0, 0, 0)\npara_noise = create_parabolic(a, x_0, s_a, s_b)\nx = np.linspace(-3, 3, 100)\nplt.scatter(x, para_true(x), c='r', label='true_data')\nplt.scatter(x, para_noise(x), c='k', label='noise_data')\nplt.title('True data vs Noisy data')\nplt.legend()\nplt.grid()\nplt.show()\n\n\n\n\n\nimport ipywidgets as widgets\n@widgets.interact\ndef fit(a_pred=2, b_pred=2):\n    func = create_parabolic(a_pred, b_pred, 0, 0)\n    y_pred = func(x)\n    y_true = para_noise(x)\n    loss = np.mean((y_true-y_pred)**2)\n    plt.scatter(x, y_true, alpha=0.5)\n    plt.plot(x, y_pred, '-k')\n    plt.title(f'Loss {loss:.2f}')"
+  },
+  {
+    "objectID": "posts/post-with-code/index.html",
+    "href": "posts/post-with-code/index.html",
+    "title": "Post With Code",
+    "section": "",
+    "text": "This is a post with executable code."
+  },
+  {
+    "objectID": "posts/welcome/index.html",
+    "href": "posts/welcome/index.html",
+    "title": "Welcome To My Blog",
+    "section": "",
+    "text": "This is the first post in a Quarto blog. Welcome!\n\nSince this post doesn’t specify an explicit image, the first image in the post will be used in the listing page of posts."
+  },
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "My_blog",
+    "section": "",
+    "text": "Monocular depth estimation\n\n\n\n\n\n\n\nnews\n\n\ncode\n\n\nanalysis\n\n\n\n\n\n\n\n\n\n\n\nApr 22, 2023\n\n\nalaa alnissany\n\n\n\n\n\n\n  \n\n\n\n\nMy first blog\n\n\n\n\n\n\n\nnews\n\n\ncode\n\n\nanalysis\n\n\n\n\n\n\n\n\n\n\n\nApr 22, 2023\n\n\nalaa alnissany\n\n\n\n\n\n\n  \n\n\n\n\nPost With Code\n\n\n\n\n\n\n\nnews\n\n\ncode\n\n\nanalysis\n\n\n\n\n\n\n\n\n\n\n\nApr 22, 2023\n\n\nHarlow Malloc\n\n\n\n\n\n\n  \n\n\n\n\nWelcome To My Blog\n\n\n\n\n\n\n\nnews\n\n\n\n\n\n\n\n\n\n\n\nApr 19, 2023\n\n\nTristan O’Malley\n\n\n\n\n\n\nNo matching items"
+  }
+]
